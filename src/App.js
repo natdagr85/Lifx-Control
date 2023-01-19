@@ -6,17 +6,17 @@ import { useState } from "react";
 
 function App() {
     const [show, setShow] = useState(false);
-    const [apiToken, setApiToken] = useState('')
+    const [apiToken, setApiToken] = useState('');
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true)
+    const handleShow = () => setShow(true);
   
   
   return (
     <div className="App">
-      <h1 style={{marginTop: 0}}>Lifx Light Controls</h1>
-      <Button variant="primary" onClick={handleShow}>
-        Enter API Token
-      </Button>
+      <br></br>
+      <h1 style={{color: 'white'}}>Lifx Light Controls</h1>
+      <br></br>
+      <Button variant="primary" onClick={handleShow}>Enter API Token</Button>
       <Modal show={show} onHide={handleClose}>
       <Modal.Dialog>
         <Modal.Header closeButton>
@@ -30,7 +30,7 @@ function App() {
           value={apiToken}
           onChange={event => setApiToken(event.target.value)}/>
         </Modal.Body>
-
+        
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose} >Save changes</Button>
         </Modal.Footer>

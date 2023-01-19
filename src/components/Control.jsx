@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Toggle } from "./Toggle";
 
 function use(options) {
   axios
@@ -14,6 +15,19 @@ function use(options) {
 function toggle (options, power) {
   options.data={duration: 0.5, fast: false, power: power}
     use(options);
+}
+
+function logState (state, options) {
+  console.log("Toggled:", state, options)
+  if (state) {
+    options.data={duration: 0.5, fast: false, power: 'on'}
+    use(options)
+    console.log('Turned ON');
+  } else {
+    options.data={duration: 0.5, fast: false, power: 'off'}
+    use(options)
+    console.log('Tured OFF');
+  }
 }
 
 function colorSelect(options, color) {
@@ -35,9 +49,21 @@ function Control(props) {
   };
  return (
     <div>
-      <p>Select Your Desired State</p>
-      <button className="bttn" onClick={() => (toggle(options, 'on'))}>Power On</button>
-      <button className="bttn" onClick={() => (toggle(options, 'off'))}>Power Off</button>
+      <br></br>
+      <div className="togglebttn">
+        <h3 style={{marginTop: 20, color: 'white'}}>Toggle Lights on</h3>
+        <Toggle
+        className='toggle'
+         toggled={false}
+         onClick={(toggled) => {
+          logState(toggled, options)
+         }}
+        />
+      </div>
+      <br></br>
+      <p style={{color: 'white'}}>Select Your Desired State</p>
+      {/* <button className="bttn" onClick={() => (toggle(options, 'on'))}>Power On</button>
+      <button className="bttn off" onClick={() => (toggle(options, 'off'))}>Power Off</button> */}
       <button className="bttn" onClick={() => (colorSelect(options, 'white'))}>White</button>
       <button className="bttn green" onClick={() => (colorSelect(options, 'green'))}>Green</button>
       <button className="bttn red" onClick={() => (colorSelect(options, 'red'))}>Red</button>
